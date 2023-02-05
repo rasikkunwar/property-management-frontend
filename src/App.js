@@ -19,8 +19,20 @@ function App() {
       <div className="Banner">
         <img src="/banner.jpeg" alt="Banner" />
       </div>
-      <div className="Property-list">
-        <Card style={{ width: "18rem" }}>
+      <div className="Property-container">
+        <p className="Property-title">Properties</p>
+        <div className="Property-list">
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg"/>
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
           <Card.Img variant="top" src="/banner.jpeg" />
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
@@ -30,7 +42,7 @@ function App() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem" }} className="mb-5">
           <Card.Img variant="top" src="/banner.jpeg" />
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
@@ -40,7 +52,7 @@ function App() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem" }} className="mb-5">
           <Card.Img variant="top" src="/banner.jpeg" />
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
@@ -50,7 +62,7 @@ function App() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem" }} className="mb-5">
           <Card.Img variant="top" src="/banner.jpeg" />
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
@@ -60,7 +72,88 @@ function App() {
             </Card.Text>
           </Card.Body>
         </Card>
-        
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "18rem" }} className="mb-5">
+          <Card.Img variant="top" src="/banner.jpeg" />
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+
+        </div>
       </div>
     </div>
   );
