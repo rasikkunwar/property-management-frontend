@@ -1,0 +1,24 @@
+.table-container {
+    display: block;
+    padding: 2rem;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.table-title {
+    display: flex;
+    justify-content: center;
+}
+
+.table-title p {
+    align-items: center;
+    font-weight: 800;
+    border-bottom: 3px solid rgb(196, 21, 21);
+}
+
+.table-pagination-container {
+    display: flex;
+    justify-content: center;
+}

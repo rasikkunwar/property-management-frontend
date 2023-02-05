@@ -3,6 +3,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Card from "react-bootstrap/Card";
+import LoginForm from "./components/Forms/LoginForm/LoginForm";
+import SignUp from "./components/Forms/SignUp/SignUp";
+import ListUser from "./components/Tables/ListUsers/ListUsers";
+import ListUsers from "./components/Tables/ListUsers/ListUsers";
 function App() {
   return (
     <div className="App">
@@ -16,7 +20,7 @@ function App() {
           </Container>
         </Navbar>
       </header>
-      <div className="Banner">
+      {/* <div className="Banner">
         <img src="/banner.jpeg" alt="Banner" />
       </div>
       <div className="Property-container">
@@ -151,11 +155,17 @@ function App() {
               bulk of the card's content.
             </Card.Text>
           </Card.Body>
-        </Card>
+        </Card> 
 
-        </div>
-      </div>
     </div>
+      </div >
+      */}
+
+      {/* <LoginForm /> */}
+      {/* <SignUp /> */}
+      <ListUsers />
+    </div >
+
   );
 }
 
