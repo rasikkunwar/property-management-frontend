@@ -7,6 +7,9 @@ import { getAllUsers } from '../../../services/apis/Endpoints';
 import WaitLoader from '../../Spinners/WaitLoader';
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri"
 import { Button } from 'react-bootstrap';
+import toast from 'react-hot-toast';
+import CustomToastBar from '../../Toaster/CustToastBar';
+import { redirect } from 'react-router-dom';
 
 const ListUsers = () => {
 
@@ -25,11 +28,15 @@ const ListUsers = () => {
             })
     }
 
+    const handleUserDelete = () => {
+        // TODO Delete the user
+        toast.success("User Deleted")
+    }
 
-
-    useEffect(() => {
-        fetchAllUsers()
-    }, [])
+    const handleUserUpdate = () => {
+        // TODO update the user
+        toast.success("User Updated")
+    }
 
 
     if (users.length === 0) {
@@ -39,71 +46,75 @@ const ListUsers = () => {
     }
 
     return (
-        <div className='table-container'>
-            <div className='table-title'>
-                <p>Users List</p>
+        <>
+            <CustomToastBar />
+            <div className='table-container'>
+                <div className='table-title'>
+                    <p>Users List</p>
+                </div>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th># ID</th>
+                            <th>User Name</th>
+                            <th>Full Name</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map((user, id) => {
+                            return (
+                                <tr>
+                                    <td>{user.id}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.fullname}</td>
+                                    <td>{user.address}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.phone}</td>
+                                    <td>{user.role}</td>
+                                    <td className='icon-btn-container'>
+                                        <Button
+                                            className="icon-btn"
+                                            variant='danger'
+                                            onClick={handleUserDelete}
+                                        > <RiDeleteBin5Fill /></Button>
+                                        <Button
+                                            variant='primary'
+                                            className="icon-btn"
+                                            onClick={handleUserUpdate}
+                                        > <RiEdit2Fill color='white' /></Button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+
+                    </tbody>
+                </Table>
+                <div className='table-pagination-container'>
+                    <Pagination>
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        <Pagination.Item>{1}</Pagination.Item>
+                        <Pagination.Ellipsis />
+
+                        <Pagination.Item>{10}</Pagination.Item>
+                        <Pagination.Item>{11}</Pagination.Item>
+                        <Pagination.Item active>{12}</Pagination.Item>
+                        <Pagination.Item>{13}</Pagination.Item>
+                        <Pagination.Item disabled>{14}</Pagination.Item>
+
+                        <Pagination.Ellipsis />
+                        <Pagination.Item>{20}</Pagination.Item>
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
+                </div>
             </div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th># ID</th>
-                        <th>User Name</th>
-                        <th>Full Name</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, id) => {
-                        return (
-                            <tr>
-                                <td>{user.id}</td>
-                                <td>{user.username}</td>
-                                <td>{user.fullname}</td>
-                                <td>{user.address}</td>
-                                <td>{user.email}</td>
-                                <td>{user.phone}</td>
-                                <td>{user.role}</td>
-                                <td className='icon-btn-container'>
-                                    <Button
-                                        className="icon-btn"
-                                        variant='danger'
-                                    > <RiDeleteBin5Fill /></Button>
-                                    <Button
-                                        variant='primary'
-                                        className="icon-btn"
-                                    > <RiEdit2Fill color='white' /></Button>
-                                </td>
-                            </tr>
-                        )
-                    })}
-
-                </tbody>
-            </Table>
-            <div className='table-pagination-container'>
-                <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis />
-
-                    <Pagination.Item>{10}</Pagination.Item>
-                    <Pagination.Item>{11}</Pagination.Item>
-                    <Pagination.Item active>{12}</Pagination.Item>
-                    <Pagination.Item>{13}</Pagination.Item>
-                    <Pagination.Item disabled>{14}</Pagination.Item>
-
-                    <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>
-            </div>
-        </div>
-
+        </>
 
     )
 }
