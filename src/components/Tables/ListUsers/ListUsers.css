@@ -18,6 +18,12 @@
     border-bottom: 3px solid rgb(196, 21, 21);
 }
 
+
+.icon-btn-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 .table-pagination-container {
     display: flex;
     justify-content: center;
