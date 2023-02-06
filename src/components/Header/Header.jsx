@@ -18,8 +18,8 @@ export default function Header() {
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="table" className="nav-link">
-                  Table
+                <Link to="my-listings" className="nav-link">
+                  My Listings
                 </Link>
               </Nav.Link>
             </Nav>
