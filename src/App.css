@@ -27,6 +27,29 @@
   text-decoration: none;
   color: black;
 }
+.Property-detail{
+  position: relative;
+  margin-top: 20px;
+  left: 200px;
+  right: 200px;
+}
+.Property-images{
+  width: 100vh;
+}
+.Property-specification{
+  display: flex;
+  gap:200px;
+}
+.Property-specification .title{
+  border-bottom: 2px solid black;
+}
+.Login{
+  position: relative;
+  right:  0;
+}
+.Copyright{
+  font-size: 20px;
+}
 
 .App-footer{
   /* position: fixed;
@@ -34,17 +57,4 @@
   background-color: rgb(145, 181, 196);
   padding: 10px;
   width: 100%;
-}
-.Copyright{
-  font-size: 20px;
-}
-.Property-detail{
-  position: relative;
-  margin-top: 20px;
-  left: 200px;
-  right: 200px;
-}
-.Login{
-  position: relative;
-  right:  0;
 }

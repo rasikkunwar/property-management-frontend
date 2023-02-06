@@ -1,37 +1,63 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Carousel = require('react-responsive-carousel').Carousel;
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
-var DemoCarousel = React.createClass({
-    render() {
+export default function ImageCarousel(){
         return (
-            <Carousel showArrows={true} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
+            <Carousel showArrows={true}>
                 <div>
-                    <img src="assets/1.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 1</p>
                 </div>
                 <div>
-                    <img src="assets/2.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 2</p>
                 </div>
                 <div>
-                    <img src="assets/3.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 3</p>
                 </div>
                 <div>
-                    <img src="assets/4.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 4</p>
                 </div>
                 <div>
-                    <img src="assets/5.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 5</p>
                 </div>
                 <div>
-                    <img src="assets/6.jpeg" />
+                    <img src="/banner.jpeg" />
                     <p className="legend">Legend 6</p>
                 </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                <div>
+                    <img src="/banner.jpeg" />
+                    <p className="legend">Legend 6</p>
+                </div>
+                
             </Carousel>
         );
     }
-});
-export default DemoCarousel
