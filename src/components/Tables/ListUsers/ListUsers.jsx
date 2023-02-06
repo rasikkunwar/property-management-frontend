@@ -5,6 +5,8 @@ import "./ListUsers.css"
 import axios from 'axios';
 import { getAllUsers } from '../../../services/apis/Endpoints';
 import WaitLoader from '../../Spinners/WaitLoader';
+import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri"
+import { Button } from 'react-bootstrap';
 
 const ListUsers = () => {
 
@@ -51,6 +53,7 @@ const ListUsers = () => {
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +67,16 @@ const ListUsers = () => {
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.role}</td>
+                                <td className='icon-btn-container'>
+                                    <Button
+                                        className="icon-btn"
+                                        variant='danger'
+                                    > <RiDeleteBin5Fill /></Button>
+                                    <Button
+                                        variant='primary'
+                                        className="icon-btn"
+                                    > <RiEdit2Fill color='white' /></Button>
+                                </td>
                             </tr>
                         )
                     })}
