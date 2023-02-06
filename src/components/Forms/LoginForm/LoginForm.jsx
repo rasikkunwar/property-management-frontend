@@ -2,23 +2,26 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import "./LoginForm.css"
 import CustomToastBar from '../../Toaster/CustToastBar';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTokenAfterLogin } from '../../../store/auth/auth';
 
 const LoginForm = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
     const navigate = useNavigate()
-    const [token, setToken] = useState()
     const [loading, setLoading] = useState(false)
     const [validated, setValidated] = useState(false);
 
 
+    const token = useSelector((state) => state.auth.token);
+    const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
+        setLoading(true)
         e.preventDefault()
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
@@ -27,29 +30,17 @@ const LoginForm = () => {
         } else {
             const email = emailRef.current.value
             const password = passwordRef.current.value
-            if (validCredential(email, password)) {
+            if (dispatch(fetchTokenAfterLogin(email, password)) !== null) {
                 toast.success("Logged In")
                 navigate("/table")
             } else {
                 toast.error("Failed to Login")
             }
+
+            setLoading(false)
         }
 
         setValidated(true);
-    };
-
-
-    const validCredential = (email, password) => {
-        if (email === "abc@mail.com" && password === "1234") {
-            setLoading(true)
-            let token = "<5DjL#,X>6+E|gz9yaycaS|u#&T72MZ?RIgN-l5BsaIV~xvG]7aFnB?Mg7RI*={"
-            // TODO VALIDATE THROUGH REST API
-            localStorage.setItem("token", JSON.stringify(token))
-            setLoading(false)
-            return true
-        } else {
-            return false
-        }
     }
 
     return (

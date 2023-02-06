@@ -17,6 +17,16 @@ const ListUsers = () => {
     const [loading, setLoading] = useState(true)
 
 
+    const handleUserDelete = () => {
+        // TODO Delete the user
+        toast.success("User Deleted")
+    }
+
+    const handleUserUpdate = () => {
+        // TODO update the user
+        toast.success("User Updated")
+    }
+
     const fetchAllUsers = () => {
         axios.get(getAllUsers)
             .then((res) => {
@@ -28,15 +38,10 @@ const ListUsers = () => {
             })
     }
 
-    const handleUserDelete = () => {
-        // TODO Delete the user
-        toast.success("User Deleted")
-    }
+    useEffect(() => {
+        fetchAllUsers()
+    }, [])
 
-    const handleUserUpdate = () => {
-        // TODO update the user
-        toast.success("User Updated")
-    }
 
 
     if (users.length === 0) {
