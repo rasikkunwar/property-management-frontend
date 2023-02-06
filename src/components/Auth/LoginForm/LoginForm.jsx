@@ -32,7 +32,7 @@ const LoginForm = () => {
             const password = passwordRef.current.value
             if (dispatch(fetchTokenAfterLogin(email, password)) !== null) {
                 toast.success("Logged In")
-                navigate("/table")
+                navigate("/my-listings")
             } else {
                 toast.error("Failed to Login")
             }
