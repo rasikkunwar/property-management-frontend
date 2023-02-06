@@ -44,11 +44,16 @@
 .Property-specification .title{
   border-bottom: 2px solid black;
 }
+.P-data,.L-data{
+  display: flex;
+  flex-direction: column;
+}
 .Login{
   position: relative;
   right:  0;
 }
 .Copyright{
+  text-align: center;
   font-size: 20px;
 }
 
