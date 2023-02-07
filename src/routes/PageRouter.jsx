@@ -14,7 +14,7 @@ export default function PageRouter() {
       <Route path="login" element={<LoginForm />}></Route>
       <Route path="sign-up" element={<SignUp />}></Route>
       <Route path="my-listings" element={<RequireAuth><MyListings /></RequireAuth>} ></Route>
-      <Route path="add-property" element={<AddProperty />} />
+      <Route path="add-property" element={<RequireAuth><AddProperty /></RequireAuth>} />
 
     </Routes>
   );
