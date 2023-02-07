@@ -1,17 +1,23 @@
 // For Sample Only
 
-// const baseApi = "http://localhost:8080/api/v1/"
+const baseApi = "http://172.19.140.94:8090/api"
 
-const baseApi = "https://63e0374da76cfd41058f9f05.mockapi.io/api/v1"
+const mockBaseApi = "https://63e0374da76cfd41058f9f05.mockapi.io/api/v1"
 
-const usersApi = `${baseApi}/users`
+const usersApi = `${mockBaseApi}/users`
 
-const ownerApi = `${baseApi}/owners`
+const ownerApi = `${mockBaseApi}/owners`
 
-const propertiesApi = `${baseApi}/properties`
+export const propertiesApi = `${baseApi}/property`
+
+export const loginApi = `${baseApi}/login`
 
 export const getAllUsers = usersApi
 
 export const getOwners = ownerApi
 
 export const getProperties = propertiesApi
+
+export const userDetailApi = `${baseApi}/users/userDetails`
+
+export const customerApplicationApi = `${baseApi}/application`

@@ -26,10 +26,11 @@ const LoginForm = () => {
         } else {
             const email = formData['email'].value
             const password = formData['password'].value
+
             dispatch(fetchTokenAfterLogin(email, password)).then(response=>{
                 dispatch(fetchUserDetail())
                 toast.success("Logged In Successfully");
-                navigate(state?.path || "/my-listings");
+                navigate(state?.path || "/");
             }).catch(error=>{
                 setLoading(false)
                 toast.error("Invalid Credentials")

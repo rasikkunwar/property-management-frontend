@@ -1,25 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
-
+import { fetchPropertyDetail} from "../../store/property/property";
+import { setMakeAnOfferModal } from "../../store/application/application";
+import { useSelector, useDispatch } from "react-redux";
+import {useParams} from "react-router-dom"
+import AddApplication from "../Customer/Application/AddApplication";
+import AuthService from "../../services/AuthService"
+import {useNavigate} from "react-router-dom"
 export default function PropertyDetail() {
-  const [propertyDetail, setPropertyDetail] = useState({
-    title:"Card Title",
-    text:"Some quick example text to build on the card title and make up the bulk of the card's content.",
-    price:100000,
-    address:{
-        street:"1000 N 4th St",
-        state:"Iowa",
-        city:"Fairfield"
+  const {id} = useParams();
+  const propertyDetail = useSelector((state) => state.property.propertyDetail);
+  const showMakeAnOfferModal = useSelector((state) => state.application.showMakeAnOfferModal)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = AuthService.isAuthenticated()
+  function makeAnOfferModal(){
+    if(isAuthenticated){
+      dispatch(setMakeAnOfferModal(true))
     }
-  });
+    else{
+      navigate("/login")
+    }
+  }
+  useEffect(() => {
+    dispatch(fetchPropertyDetail(id));
+  }, []);
+  
   return (
     <React.Fragment>
       <div className="Banner">
         <img src="/banner.jpeg" alt="Banner" />
       </div>
       <div className="Property-detail">
-        <h5>{propertyDetail.title}</h5>
-        <h3>${propertyDetail.price}</h3>
+        <div className="propertyTitle">
+        <h4>{propertyDetail.title}</h4>
+         <button onClick={()=>makeAnOfferModal()}>Make an offer</button>
+        </div>
+        <h5>${propertyDetail.price}</h5>
         <h6>{propertyDetail && propertyDetail.address && propertyDetail.address.street + ", " + propertyDetail.address.city + ", "+ propertyDetail.address.state}</h6>
         <p>{propertyDetail.text}</p>
         <div className="Property-images">
@@ -29,20 +46,20 @@ export default function PropertyDetail() {
             <div className="Detail">
                 <h5 className="title">Property Details</h5>
                 <div className="P-data">
-                    <span>Bedrooms: 1</span>
-                    <span>Bathrooms: 2</span>
-                    <span>Basement: None</span>
-                    <span>Basement: Yes</span>
-                    <span>Parking: Yes</span>
+                    <span>Bedrooms: {propertyDetail.propertyDetail && propertyDetail.propertyDetail.bed}</span>
+                    <span>Bathrooms: {propertyDetail.propertyDetail && propertyDetail.propertyDetail.bath}</span>
+                    <span>Basement: {propertyDetail.propertyDetail && propertyDetail.propertyDetail.hasBasement === true ? "Yes" : "No"}</span>
+                    <span>Parking: {propertyDetail.propertyDetail && propertyDetail.propertyDetail.hasParking === true ? "Yes" : "No"}</span>
                 </div>
             </div>
             <div className="Land-detail">
                 <h5 className="title">Land Details</h5>
                 <div className="L-data">
-                    <span>Lot size: 10,011 sqft</span>
+                    <span>Area size: {propertyDetail.propertyDetail && propertyDetail.propertyDetail.area} Sq.ft</span>
                 </div>
             </div>
         </div>
+        {showMakeAnOfferModal && <AddApplication></AddApplication>}
       </div>
     </React.Fragment>
   );

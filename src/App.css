@@ -76,6 +76,17 @@
   right: 200px;
 }
 
+.propertyTitle{
+  display: flex;
+  gap:20px
+}
+.propertyTitle button{
+  background-color: #ACBBD4;
+  border: none;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+  0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
 .icon-btn {
   padding: 1px;
 }

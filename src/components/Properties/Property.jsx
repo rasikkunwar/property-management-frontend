@@ -16,11 +16,13 @@ export default function Property() {
     properties.map((item) => {
       return (
         <Link to={`property/${item.id}`}>
-          <Card style={{ width: "18rem" }} className="mb-5">
-            <Card.Img variant="top" src="./banner.jpeg" />
+          <Card style={{ width: "20rem" }} className="mb-5">
+            <Card.Img variant="top" src={"data:image/jpeg;base64,"+item.image} />
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
+              <Card.Text>$ {item.price}</Card.Text>
               <Card.Text>{item.description}</Card.Text>
+              <Card.Text>{item.address}</Card.Text>
             </Card.Body>
           </Card>
         </Link>
