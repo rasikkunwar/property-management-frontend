@@ -4,6 +4,7 @@ import SignUp from "../components/Auth/SignUp/SignUp";
 import PropertyDetail from "../components/Properties/PropertyDetail";
 import MyListings from "../components/Listings/ListUsers/MyListings";
 import Home from "../pages/Home";
+import RequireAuth from "../components/Auth/RequireAuth";
 export default function PageRouter() {
   return (
     <Routes>
@@ -11,7 +12,7 @@ export default function PageRouter() {
       <Route path="property/:id" element={<PropertyDetail />}></Route>
       <Route path="login" element={<LoginForm />}></Route>
       <Route path="sign-up" element={<SignUp />}></Route>
-      <Route path="my-listings" element={<MyListings />}></Route>
+      <Route path="my-listings" element={<RequireAuth><MyListings /></RequireAuth>} ></Route>
 
     </Routes>
   );
