@@ -14,50 +14,47 @@ import { useNavigate } from "react-router-dom";
 const MyListings = () => {
   const listings = useSelector((state) => state.myListings.listings);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     dispatch(fetchListings());
   }, []);
 
-
   return (
     <React.Fragment>
       <WaitLoader></WaitLoader>
 
-      <div className="table-container">
-        <div className="table-title">
-          <p>My Listings</p>
-          <Button
-            className="add-property-btn"
-            size="sm"
-            variant="secondary"
-            onClick={e => navigate("/add-property")}
-          >
-            Add Property
-          </Button>
-        </div>
+      {listings && (
+        <div className="table-container">
+          <div className="table-title">
+            <p>My Listings</p>
+            <Button
+              className="add-property-btn"
+              size="sm"
+              variant="secondary"
+              onClick={(e) => navigate("/add-property")}
+            >
+              Add Property
+            </Button>
+          </div>
 
-
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th># ID</th>
-              <th>User Name</th>
-              <th>Full Name</th>
-              <th>Address</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Role</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              listings.map((user, id) => {
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th># ID</th>
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listings.map((user, id) => {
                 return (
                   <tr>
                     <td>{user.id}</td>
@@ -71,37 +68,36 @@ const MyListings = () => {
                       <Button className="icon-btn" variant="danger">
                         <RiDeleteBin5Fill />
                       </Button>
-                      <Button
-                        variant="primary"
-                        className="icon-btn">
+                      <Button variant="primary" className="icon-btn">
                         <RiEdit2Fill color="white" />
                       </Button>
                     </td>
                   </tr>
                 );
               })}
-          </tbody>
-        </Table>
-        <div className="table-pagination-container">
-          <Pagination>
-            <Pagination.First />
-            <Pagination.Prev />
-            <Pagination.Item>{1}</Pagination.Item>
-            <Pagination.Ellipsis />
+            </tbody>
+          </Table>
+          <div className="table-pagination-container">
+            <Pagination>
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item>{1}</Pagination.Item>
+              <Pagination.Ellipsis />
 
-            <Pagination.Item>{10}</Pagination.Item>
-            <Pagination.Item>{11}</Pagination.Item>
-            <Pagination.Item active>{12}</Pagination.Item>
-            <Pagination.Item>{13}</Pagination.Item>
-            <Pagination.Item disabled>{14}</Pagination.Item>
+              <Pagination.Item>{10}</Pagination.Item>
+              <Pagination.Item>{11}</Pagination.Item>
+              <Pagination.Item active>{12}</Pagination.Item>
+              <Pagination.Item>{13}</Pagination.Item>
+              <Pagination.Item disabled>{14}</Pagination.Item>
 
-            <Pagination.Ellipsis />
-            <Pagination.Item>{20}</Pagination.Item>
-            <Pagination.Next />
-            <Pagination.Last />
-          </Pagination>
+              <Pagination.Ellipsis />
+              <Pagination.Item>{20}</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };

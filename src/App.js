@@ -9,7 +9,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import AuthService from './services/AuthService';
 import { useEffect } from "react";
 import {fetchUserDetail} from './store/auth/auth';
+import axios from 'axios'
+import {redirect,useNavigate} from "react-router-dom"
+
 function App() {
+  const navigate = useNavigate();
+// Add a request interceptor
+axios.interceptors.request.use(
+  config => {
+    const token = AuthService.getAuthHeader();
+    if (token) {
+      config.headers['Authorization'] = token
+    }
+    return config
+  },
+  error => {
+    Promise.reject(error)
+  }
+)
+
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  function (error) {
+    const originalRequest = error.config
+
+    if (
+      error.response.status === 401 ) {
+      navigate("/")
+      return Promise.reject(error)
+    }
+    return Promise.reject(error)
+  }
+)
   const isAuthenticated = AuthService.isAuthenticated();
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -17,12 +50,10 @@ function App() {
   })
   return (
     <div className="App">
-      <BrowserRouter>
       <Header></Header>
       <CustomToastBar />
       <PageRouter></PageRouter>
-      <Footer></Footer>
-      </BrowserRouter>
+      {/* <Footer></Footer> */}
     </div>
   );
 }

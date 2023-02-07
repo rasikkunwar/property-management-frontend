@@ -10,9 +10,9 @@ export default function Header() {
   const { pathname } = useLocation();
   const isAuthenticated = AuthService.isAuthenticated();
   const userDetail = useSelector((state) => state.auth.user_detail);
-  function logout(){
+  function logout() {
     AuthService.logout();
-    navigate("/login")
+    navigate("/");
   }
   return (
     <React.Fragment>
@@ -22,21 +22,30 @@ export default function Header() {
             <Container>
               <Navbar.Brand href="/">SRNA</Navbar.Brand>
               <Nav>
-                <Nav.Link to="/">
+                {/* <Nav.Link to="/">
                   <Link to="/" className="nav-link">
                     Home
                   </Link>
-                </Nav.Link>
-                <Nav.Link>
-                  <Link to="my-listings" className="nav-link">
-                    My Listings
-                  </Link>
-                </Nav.Link>
+                </Nav.Link> */}
+                {isAuthenticated && userDetail.role === "OWNER" && (
+                  <Nav.Link>
+                    <Link to="my-listings" className="nav-link">
+                      My Listings
+                    </Link>
+                  </Nav.Link>
+                )}
+
+                {isAuthenticated && userDetail.role === "CUSTOMER" && (
+                  <Nav.Link>
+                    <Link to="my-applications" className="nav-link">
+                      My Applications
+                    </Link>
+                  </Nav.Link>
+                )}
               </Nav>
               <Nav>
                 {isAuthenticated ? (
-                 <Nav.Link>{userDetail.name}</Nav.Link>
-                  
+                  <Nav.Link>{userDetail.username}</Nav.Link>
                 ) : (
                   <Nav.Link>
                     <Link to="login" className="nav-link">
@@ -44,9 +53,17 @@ export default function Header() {
                     </Link>
                   </Nav.Link>
                 )}
-                {isAuthenticated && <div><Nav.Link onClick={()=>{
-                  logout()
-                }}>Logout</Nav.Link></div>}
+                {isAuthenticated && (
+                  <div>
+                    <Nav.Link
+                      onClick={() => {
+                        logout();
+                      }}
+                    >
+                      Logout
+                    </Nav.Link>
+                  </div>
+                )}
               </Nav>
             </Container>
           </Navbar>

@@ -1,21 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {getProperties} from "../../services/apis/Endpoints"
+import {getProperties,propertiesApi} from "../../services/apis/Endpoints"
 import {setLoading} from "../../store/loading/loading"
 export const propertySlice = createSlice({
   name: "property",
   initialState: {
     properties: [],
+    propertyDetail:{},
   },
   reducers: {
     setProperties: (state, { payload }) => {
         state.properties = payload;
       },
+      setPropertyDetail: (state, { payload }) => {
+        state.propertyDetail = payload;
+      },
     }
 });
 
 
-export const {  setProperties } = propertySlice.actions;
+export const {  setProperties, setPropertyDetail } = propertySlice.actions;
 
 export function fetchProperties() {
     return async (dispatch) => {
@@ -23,7 +27,7 @@ export function fetchProperties() {
       await axios
         .get(getProperties)
         .then((response) => {
-          dispatch(setProperties(response.data));
+          dispatch(setProperties(response.data.data));
           dispatch(setLoading(false))
         })
         .catch((er) => {
@@ -31,5 +35,21 @@ export function fetchProperties() {
         });
     };
   }
+
+  export function fetchPropertyDetail(id) {
+    return async (dispatch) => {
+      dispatch(setLoading(true))
+      await axios
+        .get(propertiesApi+"/"+id)
+        .then((response) => {
+          dispatch(setPropertyDetail(response.data.data));
+          dispatch(setLoading(false))
+        })
+        .catch((er) => {
+          dispatch(setLoading(false))
+        });
+    };
+  }
+  
 
 export default propertySlice.reducer;
