@@ -9,6 +9,9 @@ const CustomToastBar = () => {
         gutter={0}
         containerClassName=""
         containerStyle={{}}
+        toastOptions={{
+            duration: 3000,
+        }}
     />
 }
 
