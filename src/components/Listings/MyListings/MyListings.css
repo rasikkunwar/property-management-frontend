@@ -9,7 +9,13 @@
 
 .table-title {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.table-title .add-property-btn {
+    height: fit-content;
+    font-size: small;
+    font-weight: 700;
 }
 
 .table-title p {

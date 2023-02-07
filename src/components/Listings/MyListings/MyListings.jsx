@@ -9,19 +9,39 @@ import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchListings } from "../../../store/myListings/myListings";
-const ListUsers = () => {
+import { useNavigate } from "react-router-dom";
+
+const MyListings = () => {
   const listings = useSelector((state) => state.myListings.listings);
+
+  const navigate = useNavigate()
+
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(fetchListings());
   }, []);
+
+
   return (
     <React.Fragment>
       <WaitLoader></WaitLoader>
+
       <div className="table-container">
         <div className="table-title">
-          <p>Users List</p>
+          <p>My Listings</p>
+          <Button
+            className="add-property-btn"
+            size="sm"
+            variant="secondary"
+            onClick={e => navigate("/add-property")}
+          >
+            Add Property
+          </Button>
         </div>
+
+
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -49,11 +69,11 @@ const ListUsers = () => {
                     <td>{user.role}</td>
                     <td className="icon-btn-container">
                       <Button className="icon-btn" variant="danger">
-                        {" "}
                         <RiDeleteBin5Fill />
                       </Button>
-                      <Button variant="primary" className="icon-btn">
-                        {" "}
+                      <Button
+                        variant="primary"
+                        className="icon-btn">
                         <RiEdit2Fill color="white" />
                       </Button>
                     </td>
@@ -86,4 +106,4 @@ const ListUsers = () => {
   );
 };
 
-export default ListUsers;
+export default MyListings;

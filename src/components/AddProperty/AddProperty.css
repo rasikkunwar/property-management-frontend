@@ -1,0 +1,22 @@
+.add-property-container {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgba(128, 128, 128, 0.277);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 90%;
+    padding: 2rem;
+    margin: auto;
+    margin-bottom: 5rem;
+}
+
+.page-header {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-weight: 800;
+    border-bottom: 3px solid rgb(196, 21, 21);
+}
