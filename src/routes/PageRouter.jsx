@@ -7,6 +7,7 @@ import AddProperty from "../components/AddProperty/AddProperty";
 import MyListings from "../components/Listings/MyListings/MyListings";
 import RequireAuth from "../components/Auth/RequireAuth";
 import Application from "../components/Customer/Application/Application";
+import Favorite from "../components/Customer/Favorite/Favorite";
 export default function PageRouter() {
   return (
     <Routes>
@@ -16,6 +17,7 @@ export default function PageRouter() {
       <Route path="sign-up" element={<SignUp />}></Route>
       <Route path="my-listings" element={<RequireAuth><MyListings/></RequireAuth>} ></Route>
       <Route path="my-applications" element={<RequireAuth><Application/> </RequireAuth>} ></Route>
+      <Route path="my-favorites" element={<RequireAuth><Favorite/> </RequireAuth>} ></Route>
       <Route path="add-property" element={<RequireAuth><AddProperty /></RequireAuth>} />
 
     </Routes>
