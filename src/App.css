@@ -95,3 +95,12 @@
   position: relative;
   right: 0;
 }
+.favorite{
+  display: flex;
+  justify-content: end;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.signUp-section a{
+  text-decoration: none;
+}

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { redirect, useNavigate, useLocation } from 'react-router-dom';
+import { redirect, useNavigate, useLocation,Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import "./LoginForm.css"
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,13 +45,13 @@ const LoginForm = () => {
 
                 <Form noValidate validated={validated} ref={formRef} onSubmit={e => handleSubmit(e)}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name="email"
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" name="email"
                             required
                             placeholder="Enter email"
                             />
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid email address.
+                            Please provide a username.
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -74,6 +74,9 @@ const LoginForm = () => {
                     >
                         Submit
                     </Button>
+                    <div className="signUp-section">
+                    <p>Don't have an account? <Link to="/sign-up">Sign Up</Link></p>
+                    </div>
                 </Form>
             </div>
         </>

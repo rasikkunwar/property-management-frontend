@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAllUsers, loginApi, userDetailApi } from "../../services/apis/Endpoints"
+import { getAllUsers, loginApi,signupApi, userDetailApi } from "../../services/apis/Endpoints"
 import AuthService from "../../services/AuthService";
 export const authSlice = createSlice({
     name: "auth",
@@ -32,6 +32,17 @@ export function fetchTokenAfterLogin( email, password ) {
         ));
         localStorage.setItem("access_token", response.data.data.accessToken)
         localStorage.setItem("refresh_token", response.data.data.accessToken)
+        }
+        catch(err){
+            throw new Error(err)
+        }
+    };
+}
+export function handleSignUp(formData){
+    return async (dispatch) => {
+        try{
+           const response =  await axios.post(signupApi,formData)
+           return response;
         }
         catch(err){
             throw new Error(err)

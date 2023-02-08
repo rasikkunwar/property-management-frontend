@@ -4,6 +4,7 @@ import loadingReducer from '../store/loading/loading'
 import myListingsReducer from '../store/myListings/myListings'
 import authReducer from "../store/auth/auth"
 import applicationReducer from './application/application'
+import favoriteReducer from './favorite/favorite'
 import myPropertyApplicationsReducer from './myPropertyApplications/myPropertyApplications'
 export default configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export default configureStore({
     loading: loadingReducer,
     myListings: myListingsReducer,
     auth: authReducer,
-    application: applicationReducer,
+    application:applicationReducer,
+    favorite:favoriteReducer,
     myPropertyApplications: myPropertyApplicationsReducer
   }
 })

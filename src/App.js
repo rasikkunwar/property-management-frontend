@@ -34,10 +34,11 @@ axios.interceptors.response.use(
   },
   function (error) {
     const originalRequest = error.config
-
     if (
-      error.response.status === 401 ) {
+      error.response.status === 403) {
       navigate("/")
+      localStorage.removeItem("access_token")
+      localStorage.removeItem("refresh_token")
       return Promise.reject(error)
     }
     return Promise.reject(error)
@@ -46,6 +47,7 @@ axios.interceptors.response.use(
   const isAuthenticated = AuthService.isAuthenticated();
   const dispatch = useDispatch()
   useEffect(()=>{
+    console.log(isAuthenticated)
     isAuthenticated && dispatch(fetchUserDetail())
   })
   return (
