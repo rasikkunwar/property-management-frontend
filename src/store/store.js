@@ -5,13 +5,15 @@ import myListingsReducer from '../store/myListings/myListings'
 import authReducer from "../store/auth/auth"
 import applicationReducer from './application/application'
 import favoriteReducer from './favorite/favorite'
+import myPropertyApplicationsReducer from './myPropertyApplications/myPropertyApplications'
 export default configureStore({
   reducer: {
-    property:propertyReducer,
-    loading:loadingReducer,
-    myListings:myListingsReducer,
+    property: propertyReducer,
+    loading: loadingReducer,
+    myListings: myListingsReducer,
     auth: authReducer,
     application:applicationReducer,
-    favorite:favoriteReducer
+    favorite:favoriteReducer,
+    myPropertyApplications: myPropertyApplicationsReducer
   }
 })

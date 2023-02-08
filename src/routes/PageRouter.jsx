@@ -8,6 +8,8 @@ import MyListings from "../components/Listings/MyListings/MyListings";
 import RequireAuth from "../components/Auth/RequireAuth";
 import Application from "../components/Customer/Application/Application";
 import Favorite from "../components/Customer/Favorite/Favorite";
+import MyProperties from "../components/Owner/MyProperties/MyProperties";
+import MyPropertyOffers from "../components/Owner/MyPropertyOffers/MyPropertyOffers";
 export default function PageRouter() {
   return (
     <Routes>
@@ -18,8 +20,11 @@ export default function PageRouter() {
       <Route path="my-listings" element={<RequireAuth><MyListings/></RequireAuth>} ></Route>
       <Route path="my-applications" element={<RequireAuth><Application/> </RequireAuth>} ></Route>
       <Route path="my-favorites" element={<RequireAuth><Favorite/> </RequireAuth>} ></Route>
+      <Route path="my-properties" element={<RequireAuth><MyProperties /></RequireAuth>} ></Route>
+      <Route path="my-applications" element={<RequireAuth><Application /> </RequireAuth>} ></Route>
       <Route path="add-property" element={<RequireAuth><AddProperty /></RequireAuth>} />
-
+      <Route path="properties-offers" element={<RequireAuth><MyPropertyOffers /></RequireAuth>} />
+      <Route path="/update-property/:propertyId" element={<RequireAuth><AddProperty /></RequireAuth>} />
     </Routes>
   );
 }

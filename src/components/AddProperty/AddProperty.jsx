@@ -6,8 +6,14 @@ import "./AddProperty.css"
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addProperty, fetchPropertyById, getPropertyById } from '../../store/myListings/myListings'
 
 const AddProperty = () => {
+
+
+    const dispatch = useDispatch()
 
     const addressStates = unitedStates
     const [hasBasement, setHasBasement] = useState(false)
@@ -16,6 +22,16 @@ const AddProperty = () => {
     const [imagePreview, setImagePreview] = useState()
     const [validated, setValidated] = useState()
     const formRef = useRef()
+
+    const [propertyData, setPropertyData] = useState([])
+
+    const navigate = useNavigate()
+
+    const { propertyId } = useParams()
+
+    const fillFormRefData = () => {
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -58,22 +74,17 @@ const AddProperty = () => {
                 "city": city.value,
                 "state": state.value,
                 "zipcode": zipCode.value,
-                "ownerId": 1,
                 "builtYear": builtYear.value
             }
 
-            console.log(property)
-
-            const addPropertyApi = "http://172.19.140.94:8090/api/property"
-
-            axios.post(addPropertyApi, property)
+            dispatch(addProperty(property))
                 .then((res) => {
-                    console.log(res.data)
-                    toast.success(res.data.message)
+                    navigate("/my-properties")
+                    toast.success(res.message)
                 }).catch((e) => {
-                    console.log(e.message)
                     toast.error(e.message)
                 })
+
         }
 
         setValidated(true);
@@ -108,6 +119,20 @@ const AddProperty = () => {
         return () => URL.revokeObjectURL(objectUrl)
 
     }, [selectedImage])
+
+
+    // For Update Property
+    useEffect(() => {
+        if (propertyId) {
+            console.log(propertyId)
+            dispatch(fetchPropertyById(propertyId))
+                .then((res) => {
+                    console.log(res)
+                }).catch((e) => {
+                    console.log(e.message)
+                })
+        }
+    }, [propertyId])
 
 
     return (

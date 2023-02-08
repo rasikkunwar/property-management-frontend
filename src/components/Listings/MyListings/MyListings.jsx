@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Pagination from "react-bootstrap/Pagination";
 import "./MyListings.css";
-import axios from "axios";
-import { getAllUsers } from "../../../services/apis/Endpoints";
 import WaitLoader from "../../Spinners/WaitLoader";
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { Button } from "react-bootstrap";
