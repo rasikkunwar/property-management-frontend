@@ -10,6 +10,10 @@ const ownerApi = `${mockBaseApi}/owners`
 
 export const propertiesApi = `${baseApi}/property`
 
+export const ownerPropertiesApi = `${baseApi}/owner/property`
+
+export const mockPropertiesApi = `${mockBaseApi}/properties`
+
 export const loginApi = `${baseApi}/login`
 
 export const getAllUsers = usersApi
@@ -21,3 +25,11 @@ export const getProperties = propertiesApi
 export const userDetailApi = `${baseApi}/users/userDetails`
 
 export const customerApplicationApi = `${baseApi}/application`
+
+export const getPropertiesOffers = `${baseApi}/owner/application`
+
+export const updatePropertyApplicationStatus = (offerId, action) => `${baseApi}/application/${offerId}?action=${action}`
+
+export const deletePropertyById = (propertyId) => `${propertiesApi}/${propertyId}`
+
+export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`

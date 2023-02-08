@@ -28,11 +28,19 @@ export default function Header() {
                   </Link>
                 </Nav.Link> */}
                 {isAuthenticated && userDetail.role === "OWNER" && (
-                  <Nav.Link>
-                    <Link to="my-listings" className="nav-link">
-                      My Listings
-                    </Link>
-                  </Nav.Link>
+                  <>
+                    <Nav.Link>
+                      <Link to="my-properties" className="nav-link">
+                        My Properties
+                      </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Link to="properties-offers" className="nav-link">
+                        Offers
+                      </Link>
+                    </Nav.Link>
+                  </>
+
                 )}
 
                 {isAuthenticated && userDetail.role === "CUSTOMER" && (
