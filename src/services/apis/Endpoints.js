@@ -41,3 +41,5 @@ export const updatePropertyStatusApi = (propertyId, action) =>
 
 
 export const changeToContingentApi = (propertyId) => `${propertiesApi}/${propertyId}/contingent`
+
+export const adminDashboardApi = `${baseApi}/dashboard/admin`;

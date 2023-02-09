@@ -65,7 +65,7 @@ export default function Header() {
                 {isAuthenticated && userDetail.role === "ADMIN" && (
                   <React.Fragment>
                     <Nav.Link>
-                      <Link to="admin-dashboard" className="nav-link">
+                      <Link to="admin/dashboard" className="nav-link">
                         Dashboard
                       </Link>
                     </Nav.Link>
