@@ -42,3 +42,5 @@ export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`;
 
 export const updatePropertyStatusApi = (propertyId, action) =>
   `${propertiesApi}/${propertyId}?action=${action}`;
+
+export const adminDashboardApi = `${baseApi}/dashboard/admin`;

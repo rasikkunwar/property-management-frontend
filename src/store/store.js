@@ -7,6 +7,8 @@ import applicationReducer from "./application/application";
 import favoriteReducer from "./favorite/favorite";
 import myPropertyApplicationsReducer from "./myPropertyApplications/myPropertyApplications";
 import usersReducer from "./users/users";
+import dashboardReducer from "./dashboard/dashboard";
+
 export default configureStore({
   reducer: {
     property: propertyReducer,
@@ -17,5 +19,6 @@ export default configureStore({
     favorite: favoriteReducer,
     myPropertyApplications: myPropertyApplicationsReducer,
     users: usersReducer,
+    dashboard: dashboardReducer,
   },
 });

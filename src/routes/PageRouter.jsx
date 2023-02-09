@@ -9,7 +9,7 @@ import Application from "../components/Customer/Application/Application";
 import Favorite from "../components/Customer/Favorite/Favorite";
 import MyProperties from "../components/Owner/MyProperties/MyProperties";
 import MyPropertyOffers from "../components/Owner/MyPropertyOffers/MyPropertyOffers";
-import Dashboard from "../components/Admin/Dashboard";
+import Dashboard from "../components/Admin/Dashboard/Dashboard";
 import ListUsers from "../components/Users/Users";
 import OwnerDashboard from "../components/Owner/OwnerDashboard/OwnerDashboard";
 export default function PageRouter() {
@@ -76,7 +76,7 @@ export default function PageRouter() {
         }
       />
       <Route
-        path="admin-dashboard"
+        path="admin/dashboard"
         element={
           <RequireAuth>
             <Dashboard />
