@@ -40,22 +40,35 @@ export default function Header() {
                       </Link>
                     </Nav.Link>
                   </>
-
                 )}
 
                 {isAuthenticated && userDetail.role === "CUSTOMER" && (
                   <React.Fragment>
-                  <Nav.Link>
-                    <Link to="my-applications" className="nav-link">
-                      My Applications
-                    </Link>
-                  </Nav.Link>
+                    <Nav.Link>
+                      <Link to="my-applications" className="nav-link">
+                        My Applications
+                      </Link>
+                    </Nav.Link>
 
-                   <Nav.Link>
-                    <Link to="my-favorites" className="nav-link">
-                      My Favorites
-                    </Link>
-                  </Nav.Link>
+                    <Nav.Link>
+                      <Link to="my-favorites" className="nav-link">
+                        My Favorites
+                      </Link>
+                    </Nav.Link>
+                  </React.Fragment>
+                )}
+                {isAuthenticated && userDetail.role === "ADMIN" && (
+                  <React.Fragment>
+                    <Nav.Link>
+                      <Link to="admin-dashboard" className="nav-link">
+                        Dashboard
+                      </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                      <Link to="users" className="nav-link">
+                        Users
+                      </Link>
+                    </Nav.Link>
                   </React.Fragment>
                 )}
               </Nav>

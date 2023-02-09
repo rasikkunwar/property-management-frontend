@@ -27,7 +27,7 @@
 
 .icon-btn-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .table-pagination-container {
