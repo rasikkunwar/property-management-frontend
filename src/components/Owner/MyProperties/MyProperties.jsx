@@ -143,15 +143,16 @@ const MyProperties = () => {
                           <BiShow />
                         </Button>
                       )}
-
-                      <Button
-                        variant="outline-primary"
-                        className="icon-btn"
-                        title="Update Property"
-                        onClick={(e) => handleUpdate(property.id)}
-                      >
-                        <RiEdit2Fill />
-                      </Button>
+                      {property && property.propertStatus === "CONTINGENT" && (
+                        <Button
+                          variant="outline-primary"
+                          className="icon-btn"
+                          title="Update Property"
+                          onClick={(e) => handleUpdate(property.id)}
+                        >
+                          <RiEdit2Fill />
+                        </Button>
+                      )}
                     </td>
                   </tr>
                 );

@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchApplications,
   deleteApplication,
+  downloadSalesPdf,
 } from "../../../store/application/application";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -26,6 +27,9 @@ const Application = () => {
       .catch((err) => {
         toast.error(err.message);
       });
+  }
+  function downloadPdf(id) {
+    dispatch(downloadSalesPdf(id));
   }
   useEffect(() => {
     dispatch(fetchApplications());
@@ -65,7 +69,7 @@ const Application = () => {
                           title="Download Sales PDF"
                           className="icon-btn"
                           variant="info"
-                          onClick={() => deleteMyApplication(item.id)}
+                          onClick={() => downloadPdf(item.id)}
                         >
                           <RiFilePdfLine />
                         </Button>
