@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import "./Application.css";
 import WaitLoader from "../../Spinners/WaitLoader";
 import { RiDeleteBin5Fill, RiFilePdfFill, RiFilePdfLine } from "react-icons/ri";
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchApplications,
@@ -62,7 +62,12 @@ const Application = () => {
                     <td>{id + 1}</td>
                     <td>{item.offerPrice}</td>
                     <td>{item.remarks}</td>
-                    <td>{item.status || "PENDING"}</td>
+                    <td>
+                      <Badge bg={item.status === "REJECTED" ?
+                        "danger" :
+                        item.status === "APPROVED" ? "success" : "primary"
+                      }>{item.status || "PENDING"}</Badge>
+                    </td>
                     <td className="icon-btn-container">
                       {item.status === "CONTRACTED" && (
                         <Button
