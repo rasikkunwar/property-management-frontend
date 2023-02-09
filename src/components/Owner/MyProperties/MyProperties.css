@@ -27,7 +27,13 @@
 
 .icon-btn-container {
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
+}
+
+.icon-btn-container .icon-btn {
+    width: fit-content;
+    height: fit-content;
 }
 
 .table-pagination-container {

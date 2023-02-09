@@ -30,6 +30,11 @@ export default function Header() {
                 {isAuthenticated && userDetail.role === "OWNER" && (
                   <>
                     <Nav.Link>
+                      <Link to="owner/dashboard" className="nav-link">
+                        Dashboard
+                      </Link>
+                    </Nav.Link>
+                    <Nav.Link>
                       <Link to="my-properties" className="nav-link">
                         My Properties
                       </Link>
@@ -45,17 +50,17 @@ export default function Header() {
 
                 {isAuthenticated && userDetail.role === "CUSTOMER" && (
                   <React.Fragment>
-                  <Nav.Link>
-                    <Link to="my-applications" className="nav-link">
-                      My Applications
-                    </Link>
-                  </Nav.Link>
+                    <Nav.Link>
+                      <Link to="my-applications" className="nav-link">
+                        My Applications
+                      </Link>
+                    </Nav.Link>
 
-                   <Nav.Link>
-                    <Link to="my-favorites" className="nav-link">
-                      My Favorites
-                    </Link>
-                  </Nav.Link>
+                    <Nav.Link>
+                      <Link to="my-favorites" className="nav-link">
+                        My Favorites
+                      </Link>
+                    </Nav.Link>
                   </React.Fragment>
                 )}
               </Nav>

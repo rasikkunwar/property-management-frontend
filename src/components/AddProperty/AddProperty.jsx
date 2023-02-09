@@ -8,7 +8,7 @@ import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addProperty, fetchPropertyById, getPropertyById } from '../../store/myListings/myListings'
+import { addProperty, fetchPropertyById, getPropertyById, updatePropertyById } from '../../store/myListings/myListings'
 
 const AddProperty = () => {
 
@@ -23,15 +23,11 @@ const AddProperty = () => {
     const [validated, setValidated] = useState()
     const formRef = useRef()
 
-    const [propertyData, setPropertyData] = useState([])
+    // const [propertyData, setPropertyData] = useState([])
 
     const navigate = useNavigate()
 
     const { propertyId } = useParams()
-
-    const fillFormRefData = () => {
-
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -77,13 +73,29 @@ const AddProperty = () => {
                 "builtYear": builtYear.value
             }
 
-            dispatch(addProperty(property))
-                .then((res) => {
-                    navigate("/my-properties")
-                    toast.success(res.message)
-                }).catch((e) => {
-                    toast.error(e.message)
-                })
+
+            // console.log(property)
+
+            if (propertyId) {
+                dispatch(updatePropertyById(propertyId, property))
+                    .then((res) => {
+                        console.log("PROPERTY UPDATED!!")
+                        navigate("/my-properties")
+                        toast.success(res.message)
+                    }).catch((e) => {
+                        toast.error(e.message)
+                    })
+            }
+
+            if (!propertyId) {
+                dispatch(addProperty(property))
+                    .then((res) => {
+                        navigate("/my-properties")
+                        toast.success(res.message)
+                    }).catch((e) => {
+                        toast.error(e.message)
+                    })
+            }
 
         }
 
@@ -122,12 +134,57 @@ const AddProperty = () => {
 
 
     // For Update Property
+
+
+    const fillFormRefData = (propertyData) => {
+        const {
+            propertyTitle,
+            propertyDescription,
+            propertyArea,
+            propertyOption,
+            propertyType,
+            builtYear,
+            street,
+            city,
+            state,
+            zipCode,
+            hasBasement,
+            hasParking,
+            numberOfbed,
+            numberOfbaths,
+            propertyPrice,
+        } = formRef.current;
+
+
+        console.log(propertyData.propertyDetail.hasParking)
+
+        propertyTitle.value = propertyData.title
+        propertyDescription.value = propertyData.propertyDetail.description
+        propertyArea.value = propertyData.propertyDetail.area
+        propertyOption.value = propertyData.propertyOption
+        propertyType.value = propertyData.propertyType
+        builtYear.value = propertyData.builtYear
+        street.value = propertyData.address.street
+        city.value = propertyData.address.city
+        state.value = propertyData.address.state
+        zipCode.value = propertyData.address.zipcode
+        hasBasement.value = propertyData.propertyDetail.hasBasement
+        hasParking.value = propertyData.propertyDetail.hasParking
+        numberOfbed.value = propertyData.propertyDetail.bed
+        numberOfbaths.value = propertyData.propertyDetail.bath
+        propertyPrice.value = propertyData.price
+
+        setHasBasement(hasBasement.value)
+        setHasParking(hasParking.value)
+    }
+
+
     useEffect(() => {
         if (propertyId) {
-            console.log(propertyId)
+            // console.log(propertyId)
             dispatch(fetchPropertyById(propertyId))
                 .then((res) => {
-                    console.log(res)
+                    fillFormRefData(res.data)
                 }).catch((e) => {
                     console.log(e.message)
                 })
@@ -137,7 +194,7 @@ const AddProperty = () => {
 
     return (
         <>
-            <div className='page-header'><p className='title'>Add Property</p></div>
+            <div className='page-header'><p className='title'>{propertyId ? "Update Property" : "Add Property"}</p></div>
             <div className='add-property-container'>
                 <Form noValidate validated={validated} ref={formRef} onSubmit={e => handleSubmit(e)}>
 
@@ -234,9 +291,9 @@ const AddProperty = () => {
                                 <Form.Label>Property Option</Form.Label>
                                 <Form.Select placeholder='Choose Property Option' required name="propertyOption">
                                     <option disabled>Choose Property Option</option>
-                                    <option defaultChecked value={"Rent"}>Rental</option>
-                                    <option value={"Sale"}>Sale</option>
-                                    <option value={"Mortgage"}>Mortgage</option>
+                                    <option defaultChecked value={"RENTAL"}>Rental</option>
+                                    <option value={"SALES"}>Sale</option>
+                                    <option value={"MORTGAGE"}>Mortgage</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid">
                                     Please Provide Property Area
@@ -404,7 +461,7 @@ const AddProperty = () => {
                         </div>
                     </div>
 
-                    <div className='row'>
+                    {!propertyId && (<div className='row'>
                         <p className='property-add-subtitles'>Image</p>
 
                         <div className='col-sm'>
@@ -430,7 +487,8 @@ const AddProperty = () => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </div>
-                    </div>
+                    </div>)}
+
 
                     <div className='row-button-submit-property'>
                         <Button variant="primary" type="submit">

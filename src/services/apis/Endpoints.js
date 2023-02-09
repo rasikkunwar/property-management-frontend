@@ -38,3 +38,5 @@ export const updatePropertyApplicationStatus = (offerId, action) => `${baseApi}/
 export const deletePropertyById = (propertyId) => `${propertiesApi}/${propertyId}`
 
 export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`
+
+export const updatePropertyStatusApi = (propertyId, action) => `${propertiesApi}/${propertyId}?action=${action}`
