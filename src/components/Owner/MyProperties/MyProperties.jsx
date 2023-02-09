@@ -3,11 +3,13 @@ import Table from "react-bootstrap/Table";
 import WaitLoader from "../../Spinners/WaitLoader";
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { BiShow, BiHide } from "react-icons/bi"
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchListings } from "../../../store/myListings/myListings";
+import { fetchListings, updatePropertyStatus } from "../../../store/myListings/myListings";
 import { useNavigate } from "react-router-dom";
 import "./MyProperties.css";
+import { toast } from "react-hot-toast";
+import { act } from "react-dom/test-utils";
 
 const MyProperties = () => {
   const listings = useSelector((state) => state.myListings.listings);
@@ -18,6 +20,16 @@ const MyProperties = () => {
 
   const handleUpdate = (propertyId) => {
     navigate(`/update-property/${propertyId}`)
+  }
+
+  const changeIsActiveStatus = (propertyId, action) => {
+    dispatch(updatePropertyStatus(propertyId, action))
+      .then((res) => {
+        dispatch(fetchListings())
+        toast.success(res.message)
+      }).catch((e) => {
+        toast.error(e.message)
+      })
   }
 
   useEffect(() => {
@@ -48,8 +60,9 @@ const MyProperties = () => {
               <tr>
                 <th># S.N</th>
                 <th>Property Title</th>
+                <th>Address</th>
                 <th>Views</th>
-                {/* <th>Offers Made</th> */}
+                <th>Offers</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -60,16 +73,39 @@ const MyProperties = () => {
                   <tr key={id}>
                     <td>{id + 1}</td>
                     <td>{property.title}</td>
-                    <td>{property.propertyViewCount ? property.propertyViewCount : "No Views"}</td>
-                    <th>{property.status}</th>
-                    {/* <td>{property.offers}</td> */}
+                    <td>{property.address}</td>
+                    <td>{property.viewCount}</td>
+                    <td>{property.offerCount}</td>
+                    <td><Badge bg={
+                      property.propertStatus === "AVAILABLE" ?
+                        "success" :
+                        property.propertStatus === "PENDING" ?
+                          "warning" : "secondary"}
+                    >{property.propertStatus}</Badge></td>
                     <td className="icon-btn-container">
-                      <Button className="icon-btn" variant="outline-success" title="Show Property">
-                        <BiShow />
-                      </Button>
-                      <Button className="icon-btn" variant="outline-danger" title="Hide Property">
+                      {property.isActive && <Button
+                        className="icon-btn"
+                        variant="outline-danger"
+                        title="Hide Property"
+                        onClick={e => {
+                          console.log(property.isActive)
+                          changeIsActiveStatus(property.id, "hide")
+                        }}
+                      >
                         <BiHide />
-                      </Button>
+                      </Button>}
+                      {!property.isActive && <Button
+                        className="icon-btn"
+                        variant="outline-success"
+                        title="Show Property"
+                        onClick={e => {
+                          console.log(property.isActive)
+                          changeIsActiveStatus(property.id, "show")
+                        }}
+                      >
+                        <BiShow />
+                      </Button>}
+
                       <Button variant="outline-primary" className="icon-btn" title="Update Property"
                         onClick={e => handleUpdate(property.id)}>
                         <RiEdit2Fill />
