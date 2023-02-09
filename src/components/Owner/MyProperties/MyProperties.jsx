@@ -5,11 +5,10 @@ import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { BiShow, BiHide } from "react-icons/bi"
 import { Badge, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchListings, updatePropertyStatus } from "../../../store/myListings/myListings";
+import { changeToContingent, fetchListings, updatePropertyStatus } from "../../../store/myListings/myListings";
 import { useNavigate } from "react-router-dom";
 import "./MyProperties.css";
 import { toast } from "react-hot-toast";
-import { act } from "react-dom/test-utils";
 
 const MyProperties = () => {
   const listings = useSelector((state) => state.myListings.listings);
@@ -27,6 +26,16 @@ const MyProperties = () => {
       .then((res) => {
         dispatch(fetchListings())
         toast.success(res.message)
+      }).catch((e) => {
+        toast.error(e.message)
+      })
+  }
+
+  const resolvePropertyStatus = (propertyId) => {
+    dispatch(changeToContingent(propertyId))
+      .then((res) => {
+        toast.success(res.message)
+        dispatch(fetchListings())
       }).catch((e) => {
         toast.error(e.message)
       })
@@ -76,12 +85,18 @@ const MyProperties = () => {
                     <td>{property.address}</td>
                     <td>{property.viewCount}</td>
                     <td>{property.offerCount}</td>
-                    <td><Badge bg={
-                      property.propertStatus === "AVAILABLE" ?
-                        "success" :
-                        property.propertStatus === "PENDING" ?
-                          "warning" : "secondary"}
-                    >{property.propertStatus}</Badge></td>
+                    <td className="status-container">
+                      <Badge bg={
+                        property.propertStatus === "AVAILABLE" ?
+                          "success" :
+                          property.propertStatus === "PENDING" ?
+                            "warning" : "secondary"}
+                      >{property.propertStatus}</Badge>
+                      {property.propertStatus === "PENDING" && <Badge
+                        className="m-1 resolve-action-button"
+                        onClick={e => resolvePropertyStatus(property.id)}
+                        bg="primary">Resolve</Badge>}
+                    </td>
                     <td className="icon-btn-container">
                       {property.isActive && <Button
                         className="icon-btn"

@@ -37,14 +37,6 @@ const MyPropertyOffers = () => {
                 <div className="table-container">
                     <div className="table-title">
                         <p>Property Applications</p>
-                        {/* <Button
-                            className="add-property-btn"
-                            size="sm"
-                            variant="secondary"
-                            onClick={(e) => navigate("/add-property")}
-                        >
-                            Add Property
-                        </Button> */}
                     </div>
 
                     <Table striped bordered hover>
@@ -67,12 +59,14 @@ const MyPropertyOffers = () => {
                                         <td>{offer.propertyTitle}</td>
                                         <td>{offer.offeredBy}</td>
                                         <td>{offer.offerPrice}</td>
-                                        <td><Badge bg={
-                                            offer.status === "PENDING" ?
-                                                "warning" :
-                                                offer.status === "REJECTED" ?
-                                                    "danger" : "success"}
-                                        >{offer.status}</Badge></td>
+                                        <td >
+                                            <Badge bg={
+                                                offer.status === "PENDING" ?
+                                                    "warning" :
+                                                    offer.status === "REJECTED" ?
+                                                        "danger" : "success"}
+                                            >{offer.status}</Badge>
+                                        </td>
                                         <td>{offer.remarks}</td>
                                         <td className="icon-btn-container">
                                             <Button

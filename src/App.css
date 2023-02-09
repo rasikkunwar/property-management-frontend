@@ -68,9 +68,13 @@
 .App-footer {
   /* position: fixed;
   bottom: 0; */
-  background-color: rgb(145, 181, 196);
+  background-color: rgb(4, 70, 99);
   padding: 10px;
   width: 100%;
+  height: 15rem;
+  margin-top: 3rem;
+  padding: 3rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .Copyright {
@@ -128,6 +132,7 @@
   transform: rotate(-20deg);
   width: 25%;
 }
+
 .svg.bi.bi-heart-fill {
   color: #324176;
 }
@@ -142,9 +147,10 @@
   position: relative;
   top: 25px;
 }
-.filterProperty{
+
+.filterProperty {
   display: flex;
   justify-content: center;
-  gap:20px;
+  gap: 20px;
   margin-top: 50px;
 }

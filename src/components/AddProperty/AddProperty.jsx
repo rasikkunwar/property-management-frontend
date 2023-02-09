@@ -21,6 +21,7 @@ const AddProperty = () => {
     const [selectedImage, setSelectedImage] = useState()
     const [imagePreview, setImagePreview] = useState()
     const [validated, setValidated] = useState()
+    const [imageError, setImageError] = useState("")
     const formRef = useRef()
 
     // const [propertyData, setPropertyData] = useState([])
@@ -74,28 +75,28 @@ const AddProperty = () => {
             }
 
 
-            // console.log(property)
+            console.log(property)
 
-            if (propertyId) {
-                dispatch(updatePropertyById(propertyId, property))
-                    .then((res) => {
-                        console.log("PROPERTY UPDATED!!")
-                        navigate("/my-properties")
-                        toast.success(res.message)
-                    }).catch((e) => {
-                        toast.error(e.message)
-                    })
-            }
+            // if (propertyId) {
+            //     dispatch(updatePropertyById(propertyId, property))
+            //         .then((res) => {
+            //             console.log("PROPERTY UPDATED!!")
+            //             navigate("/my-properties")
+            //             toast.success(res.message)
+            //         }).catch((e) => {
+            //             toast.error(e.message)
+            //         })
+            // }
 
-            if (!propertyId) {
-                dispatch(addProperty(property))
-                    .then((res) => {
-                        navigate("/my-properties")
-                        toast.success(res.message)
-                    }).catch((e) => {
-                        toast.error(e.message)
-                    })
-            }
+            // if (!propertyId) {
+            //     dispatch(addProperty(property))
+            //         .then((res) => {
+            //             navigate("/my-properties")
+            //             toast.success(res.message)
+            //         }).catch((e) => {
+            //             toast.error(e.message)
+            //         })
+            // }
 
         }
 
@@ -481,9 +482,14 @@ const AddProperty = () => {
                             </div>}
                             <Form.Group className="mb-4" controlId="formBasicPropertyImage">
                                 <Form.Label>Upload Image</Form.Label>
-                                <Form.Control type="file" onChange={e => handleImage(e)} name="propertyImage" />
+                                <Form.Control
+                                    type="file"
+                                    onChange={e => handleImage(e)}
+                                    accept="image/png, image/jpeg, image/jpeg"
+                                    name="propertyImage"
+                                    required />
                                 <Form.Control.Feedback type="invalid">
-                                    Please Provide Property Image
+                                    Please Provide Image
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </div>

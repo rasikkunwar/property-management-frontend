@@ -12,11 +12,12 @@ import MyPropertyOffers from "../components/Owner/MyPropertyOffers/MyPropertyOff
 import Dashboard from "../components/Admin/Dashboard";
 import ListUsers from "../components/Users/Users";
 import OwnerDashboard from "../components/Owner/OwnerDashboard/OwnerDashboard";
+import Footer from "../components/Footer/Footer";
 export default function PageRouter() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="property/:id" element={<PropertyDetail />}></Route>
+      <Route path="/" element={<><Home /><Footer /></>}></Route>
+      <Route path="property/:id" element={<><PropertyDetail /><Footer /></>}></Route>
       <Route path="login" element={<LoginForm />}></Route>
       <Route path="sign-up" element={<SignUp />}></Route>
       <Route
