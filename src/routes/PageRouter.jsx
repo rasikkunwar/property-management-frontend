@@ -13,11 +13,29 @@ import Dashboard from "../components/Admin/Dashboard/Dashboard";
 import ListUsers from "../components/Users/Users";
 import OwnerDashboard from "../components/Owner/OwnerDashboard/OwnerDashboard";
 import Footer from "../components/Footer/Footer";
+import ForgotPassword from "../components/Auth/PasswordReset/ForgotPassword";
+import ResetPassword from "../components/Auth/PasswordReset/ResetPassword";
 export default function PageRouter() {
   return (
     <Routes>
-      <Route path="/" element={<><Home /><Footer /></>}></Route>
-      <Route path="property/:id" element={<><PropertyDetail /><Footer /></>}></Route>
+      <Route
+        path="/"
+        element={
+          <>
+            <Home />
+            <Footer />
+          </>
+        }
+      ></Route>
+      <Route
+        path="property/:id"
+        element={
+          <>
+            <PropertyDetail />
+            <Footer />
+          </>
+        }
+      ></Route>
       <Route path="login" element={<LoginForm />}></Route>
       <Route path="sign-up" element={<SignUp />}></Route>
       <Route
@@ -156,6 +174,8 @@ export default function PageRouter() {
           </RequireAuth>
         }
       />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
     </Routes>
   );
 }

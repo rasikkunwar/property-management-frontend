@@ -1,6 +1,6 @@
 const baseApi = process.env.REACT_APP_BASE_API_URL;
 
-const mockBaseApi = process.env.REACT_APP_MOCK_BASE_API
+const mockBaseApi = process.env.REACT_APP_MOCK_BASE_API;
 
 const ownerApi = `${mockBaseApi}/owners`;
 
@@ -29,17 +29,23 @@ export const customerFavoriteApi = `${baseApi}/favorite`;
 export const getPropertiesOffers = `${baseApi}/owner/application`;
 
 export const updatePropertyApplicationStatus = (offerId, action) =>
-    `${baseApi}/application/${offerId}?action=${action}`;
+  `${baseApi}/application/${offerId}?action=${action}`;
 
 export const deletePropertyById = (propertyId) =>
-    `${propertiesApi}/${propertyId}`;
+  `${propertiesApi}/${propertyId}`;
 
 export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`;
 
 export const updatePropertyStatusApi = (propertyId, action) =>
-    `${propertiesApi}/${propertyId}?action=${action}`;
+  `${propertiesApi}/${propertyId}?action=${action}`;
 
-
-export const changeToContingentApi = (propertyId) => `${propertiesApi}/${propertyId}/contingent`
+export const changeToContingentApi = (propertyId) =>
+  `${propertiesApi}/${propertyId}/contingent`;
 
 export const adminDashboardApi = `${baseApi}/dashboard/admin`;
+
+export const passwordResetLink = (username) =>
+  `${baseApi}/login/forgotPassword?userName=${username}`;
+
+export const resetPassword = (token) =>
+  `${baseApi}/login/resetPassword/${token}`;

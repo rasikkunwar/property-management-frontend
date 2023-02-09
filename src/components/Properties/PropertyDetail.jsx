@@ -7,9 +7,11 @@ import { useParams } from "react-router-dom";
 import AddApplication from "../Customer/Application/AddApplication";
 import AuthService from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
+
 export default function PropertyDetail() {
   const { id } = useParams();
   const propertyDetail = useSelector((state) => state.property.propertyDetail);
+  const userDetail = useSelector((state) => state.auth.user_detail);
   const showMakeAnOfferModal = useSelector(
     (state) => state.application.showMakeAnOfferModal
   );
@@ -39,7 +41,14 @@ export default function PropertyDetail() {
       <div className="Property-detail">
         <div className="propertyTitle">
           <h4>{propertyDetail.title}</h4>
-          <button onClick={() => makeAnOfferModal()}>Make an offer</button>
+          {!isAuthenticated ||
+          (userDetail &&
+            userDetail.role == "CUSTOMER" &&
+            propertyDetail.propertyStatus === "AVAILABLE") ? (
+            <button onClick={() => makeAnOfferModal()}>Make an offer</button>
+          ) : (
+            ""
+          )}
         </div>
         <h5>${propertyDetail.price}</h5>
         <h6>
