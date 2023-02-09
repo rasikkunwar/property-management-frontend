@@ -2,30 +2,33 @@ import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import "./Application.css";
 import WaitLoader from "../../Spinners/WaitLoader";
-import { RiDeleteBin5Fill } from "react-icons/ri";
+import { RiDeleteBin5Fill, RiFilePdfFill, RiFilePdfLine } from "react-icons/ri";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchApplications,deleteApplication } from "../../../store/application/application";
+import {
+  fetchApplications,
+  deleteApplication,
+} from "../../../store/application/application";
 import { useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const Application = () => {
   const applications = useSelector((state) => state.application.applications);
 
-
   const dispatch = useDispatch();
 
-  function deleteMyApplication(id){
-    dispatch(deleteApplication(id)).then(response=>{
-        toast.success(response.message); 
-        dispatch(fetchApplications())
-    }).catch(err=>{
-        toast.error(err.message); 
-
-    });
+  function deleteMyApplication(id) {
+    dispatch(deleteApplication(id))
+      .then((response) => {
+        toast.success(response.message);
+        dispatch(fetchApplications());
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   }
   useEffect(() => {
-    dispatch(fetchApplications())
+    dispatch(fetchApplications());
   }, []);
 
   return (
@@ -52,12 +55,28 @@ const Application = () => {
               {applications.map((item, id) => {
                 return (
                   <tr>
-                    <td>{id+1}</td>
+                    <td>{id + 1}</td>
                     <td>{item.offerPrice}</td>
                     <td>{item.remarks}</td>
                     <td>{item.status || "PENDING"}</td>
                     <td className="icon-btn-container">
-                      <Button className="icon-btn" variant="danger" onClick={()=>deleteMyApplication(item.id)}>
+                      {item.status === "CONTRACTED" && (
+                        <Button
+                          title="Download Sales PDF"
+                          className="icon-btn"
+                          variant="info"
+                          onClick={() => deleteMyApplication(item.id)}
+                        >
+                          <RiFilePdfLine />
+                        </Button>
+                      )}
+
+                      <Button
+                        title="Delete"
+                        className="icon-btn"
+                        variant="danger"
+                        onClick={() => deleteMyApplication(item.id)}
+                      >
                         <RiDeleteBin5Fill />
                       </Button>
                     </td>

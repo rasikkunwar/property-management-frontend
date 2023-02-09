@@ -48,7 +48,7 @@ const ResetPassword = () => {
         })
         .catch((error) => {
           setLoading(false);
-          toast.error("Something went wrong");
+          toast.error(error.message);
         });
     }
 
@@ -68,7 +68,9 @@ const ResetPassword = () => {
             minLength={5}
             value={password}
             valueAgain={passwordAgain}
-            onChange={(isValid) => {}}
+            onChange={(isValid) => {
+              setLoading(!isValid);
+            }}
           />
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>

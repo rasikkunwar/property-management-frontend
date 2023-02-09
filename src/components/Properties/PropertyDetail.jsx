@@ -66,7 +66,7 @@ export default function PropertyDetail() {
             propertyDetail.propertyDetail.description}
         </p>
         <div className="Property-images">
-          <ImageCarousel></ImageCarousel>
+          <ImageCarousel detail={propertyDetail}></ImageCarousel>
         </div>
         <div className="Property-specification">
           <div className="Detail">
@@ -95,6 +95,10 @@ export default function PropertyDetail() {
                 propertyDetail.propertyDetail.hasParking === true
                   ? "Yes"
                   : "No"}
+              </span>
+              <span>
+                Built Year:{" "}
+                {propertyDetail.propertyDetail && propertyDetail.builtYear}
               </span>
             </div>
           </div>
