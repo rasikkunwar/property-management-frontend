@@ -2,22 +2,33 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { redirect, useNavigate, useLocation, Link } from "react-router-dom";
-import toast from "react-hot-toast";
-import "./LoginForm.css";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchTokenAfterLogin,
-  fetchUserDetail,
-} from "../../../store/auth/auth";
+  redirect,
+  useNavigate,
+  useLocation,
+  Link,
+  useParams,
+} from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { resetUserPassword } from "../../../store/auth/auth";
+import { isJwtExpired } from "jwt-check-expiration";
+import PasswordChecklist from "react-password-checklist";
 
-const LoginForm = () => {
+const ResetPassword = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [validated, setValidated] = useState(false);
   const { state } = useLocation();
   const dispatch = useDispatch();
   const formRef = useRef();
+  const { token } = useParams();
+
+  const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  useEffect(() => {
+    console.log("isExpired is:", isJwtExpired(token));
+  }, []);
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
@@ -27,18 +38,17 @@ const LoginForm = () => {
       e.preventDefault();
       e.stopPropagation();
     } else {
-      const email = formData["email"].value;
       const password = formData["password"].value;
 
-      dispatch(fetchTokenAfterLogin(email, password))
+      dispatch(resetUserPassword({ password: password, username: "" }, token))
         .then((response) => {
-          dispatch(fetchUserDetail());
-          toast.success("Logged In Successfully");
-          navigate(state?.path || "/");
+          setLoading(false);
+          navigate("/login");
+          toast.success("Password reset successfully");
         })
         .catch((error) => {
           setLoading(false);
-          toast.error("Invalid Credentials");
+          toast.error("Something went wrong");
         });
     }
 
@@ -53,19 +63,13 @@ const LoginForm = () => {
           ref={formRef}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="text"
-              name="email"
-              required
-              placeholder="Enter email"
-            />
-            <Form.Control.Feedback type="invalid">
-              Please provide a username.
-            </Form.Control.Feedback>
-          </Form.Group>
-
+          <PasswordChecklist
+            rules={["minLength", "specialChar", "number", "capital", "match"]}
+            minLength={5}
+            value={password}
+            valueAgain={passwordAgain}
+            onChange={(isValid) => {}}
+          />
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -73,26 +77,32 @@ const LoginForm = () => {
               name="password"
               required
               placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Form.Control.Feedback type="invalid">
               Please provide a password.
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password_confirmation"
+              required
+              placeholder="Confirm Password"
+              onChange={(e) => setPasswordAgain(e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a confirm password.
+            </Form.Control.Feedback>
+          </Form.Group>
           <Button variant="primary" type="submit" disabled={loading}>
-            Submit
+            Reset Password
           </Button>
-          <div className="signUp-section">
-            <p>
-              Don't have an account? <Link to="/sign-up">Sign Up</Link>
-            </p>
-          </div>
-          <div className="forgot-password">
-            <Link to="/forgot-password">Forgot your Password?</Link>
-          </div>
         </Form>
       </div>
     </>
   );
 };
 
-export default LoginForm;
+export default ResetPassword;

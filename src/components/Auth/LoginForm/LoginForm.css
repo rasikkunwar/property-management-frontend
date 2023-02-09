@@ -9,3 +9,6 @@
     margin: auto;
     margin-top: 3rem;
 }
+.forgot-password a{
+    text-decoration: none;
+}

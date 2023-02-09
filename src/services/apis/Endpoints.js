@@ -1,6 +1,6 @@
 const baseApi = process.env.REACT_APP_BASE_API_URL;
 
-const mockBaseApi = process.env.REACT_APP_MOCK_BASE_API
+const mockBaseApi = process.env.REACT_APP_MOCK_BASE_API;
 
 const ownerApi = `${mockBaseApi}/owners`;
 
@@ -39,11 +39,16 @@ export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`;
 export const updatePropertyStatusApi = (propertyId, action) =>
     `${propertiesApi}/${propertyId}?action=${action}`;
 
-
-export const changeToContingentApi = (propertyId) => `${propertiesApi}/${propertyId}/contingent`
+export const changeToContingentApi = (propertyId) =>
+    `${propertiesApi}/${propertyId}/contingent`;
 
 export const adminDashboardApi = `${baseApi}/dashboard/admin`;
 
 export const ownerDashboardApi = `${baseApi}/dashboard/owner`
 
 export const uploadPropertyImageApi = `${propertiesApi}/propertyFile`
+export const passwordResetLink = (username) =>
+    `${baseApi}/login/forgotPassword?userName=${username}`;
+
+export const resetPassword = (token) =>
+    `${baseApi}/login/resetPassword/${token}`;
