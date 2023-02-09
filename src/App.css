@@ -140,7 +140,7 @@
 .propertyOptionDetail {
   display: flex;
   justify-content: center;
-  background-color: red;
+  background-color: #076d99;
   color: white;
   transform: rotate(-21deg);
   width: 10%;

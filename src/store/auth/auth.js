@@ -81,7 +81,7 @@ export function resetUserPassword(formData, token) {
     try {
       const response = await axios.put(resetPassword(token), formData);
     } catch (err) {
-      throw new Error(err);
+      throw new Error(err.response.data.message);
     }
   };
 }

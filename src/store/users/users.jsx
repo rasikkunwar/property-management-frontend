@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { usersApi } from "../../services/apis/Endpoints";
+import { usersApi, adminApi } from "../../services/apis/Endpoints";
 import { setLoading } from "../../store/loading/loading";
 export const userSlice = createSlice({
   name: "users",
@@ -36,6 +36,21 @@ export function changeStatus(id) {
     dispatch(setLoading(true));
     await axios
       .post(usersApi + "/active-inactive/" + id)
+      .then((response) => {
+        dispatch(fetchUsers());
+        dispatch(setLoading(false));
+      })
+      .catch((er) => {
+        dispatch(setLoading(false));
+      });
+  };
+}
+
+export function approveUser(id) {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    await axios
+      .patch(adminApi + "/approveUser/" + id)
       .then((response) => {
         dispatch(fetchUsers());
         dispatch(setLoading(false));

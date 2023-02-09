@@ -90,7 +90,7 @@ export default function Property({ favorite }) {
                 </Button>
               </div>
               {!isAuthenticated ||
-                (userDetail && userDetail.role == "CUSTOMER") ? (
+              (userDetail && userDetail.role == "CUSTOMER") ? (
                 <div className="fav-icon">
                   {favorite || favorites.find((fav) => fav.id == item.id) ? (
                     <svg
@@ -128,6 +128,9 @@ export default function Property({ favorite }) {
               ) : (
                 ""
               )}
+            </div>
+            <div className="property-spec">
+              <span>{item.bed} bds | </span> <span> {item.bath} ba</span>
             </div>
             <Link to={`/property/${item.id}`}>
               <Card.Body>

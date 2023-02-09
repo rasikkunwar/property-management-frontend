@@ -16,6 +16,8 @@ export const signupApi = `${baseApi}/login/signup`;
 
 export const usersApi = `${baseApi}/users`;
 
+export const adminApi = `${baseApi}/admin`;
+
 export const getOwners = ownerApi;
 
 export const getProperties = propertiesApi;
@@ -29,26 +31,26 @@ export const customerFavoriteApi = `${baseApi}/favorite`;
 export const getPropertiesOffers = `${baseApi}/owner/application`;
 
 export const updatePropertyApplicationStatus = (offerId, action) =>
-    `${baseApi}/application/${offerId}?action=${action}`;
+  `${baseApi}/application/${offerId}?action=${action}`;
 
 export const deletePropertyById = (propertyId) =>
-    `${propertiesApi}/${propertyId}`;
+  `${propertiesApi}/${propertyId}`;
 
 export const getPropertyById = (propertyId) => `${propertiesApi}/${propertyId}`;
 
 export const updatePropertyStatusApi = (propertyId, action) =>
-    `${propertiesApi}/${propertyId}?action=${action}`;
+  `${propertiesApi}/${propertyId}?action=${action}`;
 
 export const changeToContingentApi = (propertyId) =>
-    `${propertiesApi}/${propertyId}/contingent`;
+  `${propertiesApi}/${propertyId}/contingent`;
 
 export const adminDashboardApi = `${baseApi}/dashboard/admin`;
 
-export const ownerDashboardApi = `${baseApi}/dashboard/owner`
+export const ownerDashboardApi = `${baseApi}/dashboard/owner`;
 
-export const uploadPropertyImageApi = `${propertiesApi}/propertyFile`
+export const uploadPropertyImageApi = `${propertiesApi}/propertyFile`;
 export const passwordResetLink = (username) =>
-    `${baseApi}/login/forgotPassword?userName=${username}`;
+  `${baseApi}/login/forgotPassword?userName=${username}`;
 
 export const resetPassword = (token) =>
-    `${baseApi}/login/resetPassword/${token}`;
+  `${baseApi}/login/resetPassword/${token}`;
