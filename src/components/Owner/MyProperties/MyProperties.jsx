@@ -143,7 +143,7 @@ const MyProperties = () => {
                           <BiShow />
                         </Button>
                       )}
-                      {property && property.propertStatus === "CONTINGENT" && (
+                      {property && property.propertStatus !== "CONTINGENT" && (
                         <Button
                           variant="outline-primary"
                           className="icon-btn"
