@@ -4,11 +4,10 @@ import propertyTypes from '../../static/PropertyType/PropertyType'
 import unitedStates from '../../static/States/State'
 import "./AddProperty.css"
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addProperty, fetchPropertyById, getPropertyById, updatePropertyById } from '../../store/myListings/myListings'
+import { addProperty, addPropertyImage, fetchPropertyById, getPropertyById, updatePropertyById } from '../../store/myListings/myListings'
 
 const AddProperty = () => {
 
@@ -77,26 +76,31 @@ const AddProperty = () => {
 
             console.log(property)
 
-            // if (propertyId) {
-            //     dispatch(updatePropertyById(propertyId, property))
-            //         .then((res) => {
-            //             console.log("PROPERTY UPDATED!!")
-            //             navigate("/my-properties")
-            //             toast.success(res.message)
-            //         }).catch((e) => {
-            //             toast.error(e.message)
-            //         })
-            // }
+            if (propertyId) {
+                dispatch(updatePropertyById(propertyId, property))
+                    .then((res) => {
+                        navigate("/my-properties")
+                        toast.success(res.message)
+                    }).catch((e) => {
+                        toast.error(e.message)
+                    })
+            }
 
-            // if (!propertyId) {
-            //     dispatch(addProperty(property))
-            //         .then((res) => {
-            //             navigate("/my-properties")
-            //             toast.success(res.message)
-            //         }).catch((e) => {
-            //             toast.error(e.message)
-            //         })
-            // }
+            if (!propertyId && selectedImage) {
+                // Details add for property
+                dispatch(addProperty(property))
+                    .then((res) => {
+                        console.log(res)
+                        // Add image of the property
+                        dispatch(addPropertyImage(res.data, selectedImage))
+                    }).then((res) => {
+                        navigate("/my-properties")
+                        toast.success("Property Added Successfully!")
+                    })
+                    .catch((e) => {
+                        toast.error(e.message)
+                    })
+            }
 
         }
 
@@ -105,12 +109,25 @@ const AddProperty = () => {
 
 
     const handleImage = (e) => {
+        const formData = formRef.current
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedImage(undefined)
             return
         }
 
         setSelectedImage(e.target.files[0])
+
+        if (e.target.files[0].size > 500000) {
+            setImageError("Image size must be less than 500 KB!")
+            const { propertyImage } = formRef.current
+            propertyImage.value = null
+            setSelectedImage(null)
+            // setImageError("")
+        } else {
+            setImageError("")
+        }
+
+
     }
 
     const removeSelectedImage = (e) => {
@@ -155,9 +172,6 @@ const AddProperty = () => {
             numberOfbaths,
             propertyPrice,
         } = formRef.current;
-
-
-        console.log(propertyData.propertyDetail.hasParking)
 
         propertyTitle.value = propertyData.title
         propertyDescription.value = propertyData.propertyDetail.description
@@ -491,6 +505,9 @@ const AddProperty = () => {
                                 <Form.Control.Feedback type="invalid">
                                     Please Provide Image
                                 </Form.Control.Feedback>
+                                {imageError && <span className='image-size-warn'>
+                                    Image size should be less than 500 KB
+                                </span>}
                             </Form.Group>
                         </div>
                     </div>)}

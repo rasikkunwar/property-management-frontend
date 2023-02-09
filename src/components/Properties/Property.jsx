@@ -73,6 +73,7 @@ export default function Property({ favorite }) {
         <React.Fragment>
           <Card style={{ width: "20rem" }} className="mb-5">
             <Card.Img
+              className="property-card-image"
               variant="top"
               src={"data:image/jpeg;base64," + item.image}
             />
@@ -89,7 +90,7 @@ export default function Property({ favorite }) {
                 </Button>
               </div>
               {!isAuthenticated ||
-              (userDetail && userDetail.role == "CUSTOMER") ? (
+                (userDetail && userDetail.role == "CUSTOMER") ? (
                 <div className="fav-icon">
                   {favorite || favorites.find((fav) => fav.id == item.id) ? (
                     <svg

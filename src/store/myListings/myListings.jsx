@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { changeToContingentApi, getProperties, getPropertyById, ownerPropertiesApi, updatePropertyStatusApi } from "../../services/apis/Endpoints"
+import { changeToContingentApi, getProperties, getPropertyById, ownerPropertiesApi, updatePropertyStatusApi, uploadPropertyImageApi } from "../../services/apis/Endpoints"
 import { setLoading } from "../../store/loading/loading"
 export const myListingsSlice = createSlice({
   name: "myListings",
@@ -53,6 +53,31 @@ export const addProperty = (property) => {
 
     try {
       const res = await axios.post(getProperties, property)
+      dispatch(setLoading(false))
+      return res.data
+    } catch (e) {
+      return e
+    }
+  }
+}
+
+export const addPropertyImage = (propertyId, file) => {
+  return async (dispatch) => {
+    dispatch(setLoading(true))
+
+    const form = new FormData()
+    form.append("propertyId", propertyId)
+    form.append("file", file)
+
+    try {
+      const res = await axios({
+        method: 'post',
+        url: uploadPropertyImageApi,
+        data: form,
+        headers: {
+          'Content-Type': "multipart/form-data",
+        },
+      });
       dispatch(setLoading(false))
       return res.data
     } catch (e) {
