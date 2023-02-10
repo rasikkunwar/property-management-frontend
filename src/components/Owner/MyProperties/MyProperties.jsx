@@ -8,11 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeToContingent,
   fetchListings,
+  revokeContingent,
   updatePropertyStatus,
 } from "../../../store/myListings/myListings";
 import { useNavigate } from "react-router-dom";
 import "./MyProperties.css";
 import { toast } from "react-hot-toast";
+import { revokeContingentApi } from "../../../services/apis/Endpoints";
 
 const MyProperties = () => {
   const listings = useSelector((state) => state.myListings.listings);
@@ -24,6 +26,17 @@ const MyProperties = () => {
   const handleUpdate = (propertyId) => {
     navigate(`/update-property/${propertyId}`);
   };
+
+  const cancelContingency = (propertyId) => {
+    dispatch(revokeContingent(propertyId))
+      .then((res) => {
+        toast.success(res.message);
+        dispatch(fetchListings());
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  }
 
   const changeIsActiveStatus = (propertyId, action) => {
     dispatch(updatePropertyStatus(propertyId, action))
@@ -100,12 +113,15 @@ const MyProperties = () => {
                           property.propertStatus === "AVAILABLE"
                             ? "success"
                             : property.propertStatus === "PENDING"
-                            ? "warning"
-                            : "secondary"
+                              ? "warning"
+                              : "secondary"
                         }
                       >
                         {property.propertStatus}
                       </Badge>
+                      {property.propertStatus === "CONTINGENT" && <Badge
+                        onClick={e => cancelContingency(property.id)}
+                        className="revoke-btn">CANCEL</Badge>}
                       {property.propertStatus === "PENDING" && (
                         <Badge
                           className="m-1 resolve-action-button"

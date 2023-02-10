@@ -70,8 +70,9 @@ const MyPropertyOffers = () => {
                           offer.status === "PENDING"
                             ? "warning"
                             : offer.status === "REJECTED"
-                            ? "danger"
-                            : "success"
+                              ? "danger"
+                              : offer.status === "CANCELLED" ? "secondary"
+                                : "success"
                         }
                       >
                         {offer.status}
@@ -94,7 +95,7 @@ const MyPropertyOffers = () => {
                         className="icon-btn"
                         disabled={
                           offer.status === "REJECTED" ||
-                          offer.status === "CONTRACTED"
+                            offer.status === "CONTRACTED" || offer.status === "CANCELLED"
                             ? true
                             : false
                         }

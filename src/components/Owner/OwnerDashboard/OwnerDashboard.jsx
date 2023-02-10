@@ -3,7 +3,6 @@ import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { fetchOwnerDashboardData } from '../../../store/dashboard/dashboard'
 import Chart from "react-apexcharts";
-import DonutChart from '../../Charts/DonutChart'
 import WaitLoader from '../../Spinners/WaitLoader'
 import "./OwnerDashboard.css"
 
@@ -19,6 +18,16 @@ const OwnerDashboard = () => {
         series: [],
         title: {
             text: "Property Application Distribution"
+        },
+        noData: {
+            text: "No data Available",
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+                color: "#ff4d69",
+            }
         }
     });
 
@@ -47,6 +56,16 @@ const OwnerDashboard = () => {
                 data: [],
             },
         ],
+        noData: {
+            text: "No data Available",
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+                color: "#ff4d69",
+            }
+        }
     });
 
     const [donutOptions, setDonutOptions] = useState({
@@ -57,6 +76,16 @@ const OwnerDashboard = () => {
         series: [],
         title: {
             text: "Property Type Count"
+        },
+        noData: {
+            text: "No data Available",
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+                color: "#ff4d69",
+            }
         }
     });
 
@@ -126,14 +155,16 @@ const OwnerDashboard = () => {
                 <div className='chart-container'>
                     <div className='owner-dashboard-chart-container'>
                         <div className='chart-box'>
-                            <Chart
-                                className="chart-box-item"
-                                options={options}
-                                series={options.series}
-                                type={options.chart.type}
-                                width={350}
-                                height={200}
-                            />
+                            {ownerDashData.propertyApplicationCountChartData &&
+                                <Chart
+                                    className="chart-box-item"
+                                    options={options}
+                                    series={options.series}
+                                    type={options.chart.type}
+                                    width={350}
+                                    height={200}
+                                />}
+
                         </div>
                         <div className='chart-box'>
                             {/* <Chart

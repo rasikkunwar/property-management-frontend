@@ -5,6 +5,7 @@ import {
   getProperties,
   getPropertyById,
   ownerPropertiesApi,
+  revokeContingentApi,
   updatePropertyStatusApi,
   uploadPropertyImageApi,
 } from "../../services/apis/Endpoints";
@@ -34,6 +35,7 @@ export function fetchListings() {
     } catch (e) {
       console.log(e.message);
       dispatch(setLoading(true));
+      throw new Error(e.response.data.message);
     }
   };
 }
@@ -47,7 +49,7 @@ export const fetchPropertyById = (propertyId) => {
       dispatch(setLoading(false));
       return res.data;
     } catch (e) {
-      return e;
+      throw new Error(e.response.data.message);
     }
   };
 };
@@ -61,7 +63,7 @@ export const addProperty = (property) => {
       dispatch(setLoading(false));
       return res.data;
     } catch (e) {
-      return e;
+      throw new Error(e.response.data.message);
     }
   };
 };
@@ -86,7 +88,7 @@ export const addPropertyImage = (propertyId, file) => {
       dispatch(setLoading(false));
       return res.data;
     } catch (e) {
-      return e;
+      throw new Error(e.response.data.message);
     }
   };
 };
@@ -100,7 +102,7 @@ export const updatePropertyById = (propertyId, propertyData) => {
       dispatch(setLoading(false));
       return res.data;
     } catch (e) {
-      return e;
+      throw new Error(e.response.data.message);
     }
   };
 };
@@ -117,7 +119,7 @@ export const updatePropertyStatus = (propertyId, action) => {
       return res.data;
     } catch (e) {
       dispatch(setLoading(false));
-      return e;
+      throw new Error(e.response.data.message);
     }
   };
 };
@@ -129,6 +131,21 @@ export const changeToContingent = (propertyId) => {
     try {
       const res = await axios.patch(changeToContingentApi(propertyId));
       console.log(res);
+      dispatch(setLoading(false));
+      return res.data;
+    } catch (e) {
+      dispatch(setLoading(false));
+      throw new Error(e.response.data.message);
+    }
+  };
+};
+
+export const revokeContingent = (propertyId) => {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+
+    try {
+      const res = await axios.patch(revokeContingentApi(propertyId));
       dispatch(setLoading(false));
       return res.data;
     } catch (e) {

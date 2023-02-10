@@ -15,6 +15,7 @@ import OwnerDashboard from "../components/Owner/OwnerDashboard/OwnerDashboard";
 import Footer from "../components/Footer/Footer";
 import ForgotPassword from "../components/Auth/PasswordReset/ForgotPassword";
 import ResetPassword from "../components/Auth/PasswordReset/ResetPassword";
+import NotFound from "../components/NotFound/NotFound";
 export default function PageRouter() {
   return (
     <Routes>
@@ -176,6 +177,7 @@ export default function PageRouter() {
       />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

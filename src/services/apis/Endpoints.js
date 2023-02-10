@@ -54,3 +54,6 @@ export const passwordResetLink = (username) =>
 
 export const resetPassword = (token) =>
   `${baseApi}/login/resetPassword/${token}`;
+
+export const revokeContingentApi = (propertyId) =>
+  `${propertiesApi}/${propertyId}/cancelContingent`;
