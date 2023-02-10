@@ -83,7 +83,7 @@ const LoginForm = () => {
           </Button>
           <div className="signUp-section">
             <p>
-              Don't have an account? <Link to="/sign-up">Sign Up</Link>
+              Don't have an account? <Link to="/sign-up">Log In</Link>
             </p>
           </div>
           <div className="forgot-password">
