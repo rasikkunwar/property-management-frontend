@@ -5,6 +5,10 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
 import { useSelector } from "react-redux";
+import { Button, NavDropdown } from "react-bootstrap";
+import UserIconImage from "../../assets/icons/user.png"
+import { MdOutlineLogout, MdOutlineLogin } from "react-icons/md"
+
 export default function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -79,15 +83,32 @@ export default function Header() {
               </Nav>
               <Nav>
                 {isAuthenticated ? (
-                  <Nav.Link>{userDetail.username}</Nav.Link>
+                  <>
+                    <NavDropdown title={<img src={UserIconImage} width={30} height={30} />}
+                      id='basic-nav-dropdown'>
+                      <NavDropdown.Item>Hi {userDetail.username}</NavDropdown.Item>
+                      <NavDropdown.Item>
+                        <div>
+                          <Nav.Link
+                            onClick={() => {
+                              logout();
+                            }}
+                          >
+                            <span className="logout-icon"><MdOutlineLogout size={20} color={"#044663"} /></span>Logout
+                          </Nav.Link>
+                        </div>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </>
                 ) : (
                   <Nav.Link>
                     <Link to="login" className="nav-link">
-                      Login
+                      <Button className="login-btn" variant="outline-primary">
+                        <span className="content">Log In</span></Button>
                     </Link>
                   </Nav.Link>
                 )}
-                {isAuthenticated && (
+                {/* {isAuthenticated && (
                   <div>
                     <Nav.Link
                       onClick={() => {
@@ -97,7 +118,7 @@ export default function Header() {
                       Logout
                     </Nav.Link>
                   </div>
-                )}
+                )} */}
               </Nav>
             </Container>
           </Navbar>

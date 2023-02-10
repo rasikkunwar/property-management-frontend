@@ -178,3 +178,27 @@
 .back-to-login a {
   text-decoration: none;
 }
+
+.header-user-icon {
+  height: 1rem;
+  width: 1rem;
+}
+
+.header-user-icon img {
+  height: 2%;
+  width: 3%;
+}
+
+.logout-icon {
+  margin-right: 10px;
+}
+
+.login-btn {
+  width: 5rem;
+  height: fit-content;
+}
+
+.login-btn .content {
+  font-size: 1rem;
+  font-weight: 500;
+}
