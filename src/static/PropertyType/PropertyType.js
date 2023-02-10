@@ -1,6 +1,6 @@
 const propertyTypes = [
   "House",
-  "Condos",
+  "Condo",
   "Apartments",
   "Townhomes",
   "Multi-family",
